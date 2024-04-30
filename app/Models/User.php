@@ -10,6 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\ResetPasswordNotification;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
