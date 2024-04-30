@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token): void
     {
-        $url = config('app.client_url').'/reset-password?token='.$token.'&email='.$this->email;
+        $url = config('app.client_url').'/reset-password?token='.$token.'&id='.base64_encode($this->email);
         $this->notify(new ResetPasswordNotification($url));
     }
 }
