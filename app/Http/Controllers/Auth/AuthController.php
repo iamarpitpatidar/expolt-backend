@@ -7,17 +7,15 @@ use App\Traits\AuthenticatesUsers;
 use App\Traits\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 final class AuthController extends Controller
 {
     use AuthenticatesUsers, ThrottlesLogins;
 
-    public function logout(Request $request): void
+    public function logout(): JsonResponse
     {
-        Auth::logout();
         Auth::user()?->tokens()->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        return $this->sendResponse('User logged out successfully');
     }
 }

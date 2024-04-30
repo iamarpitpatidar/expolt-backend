@@ -10,7 +10,7 @@ Route::get('/', function() {
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login']);
-    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
     Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
     Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']);
