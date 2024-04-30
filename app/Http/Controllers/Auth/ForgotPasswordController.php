@@ -25,9 +25,12 @@ class ForgotPasswordController extends Controller
             return Password::RESET_LINK_SENT;
         });
 
-        return ($status === Password::RESET_LINK_SENT || $status === Password::INVALID_USER)
-            ? $this->sendResponse(__('lang.passwords.sent'))
-            : $this->sendErrorResponse('Unable to send reset link, please try again in some time.', 400);
+        return match ($status) {
+            Password::RESET_LINK_SENT => $this->sendResponse(__('lang.passwords.sent')),
+            Password::INVALID_USER => $this->sendErrorResponse(__('lang.passwords.user')),
+            Password::RESET_THROTTLED => $this->sendErrorResponse(__('lang.passwords.throttled')),
+            default => $this->sendErrorResponse(__('lang.passwords.failed')),
+        };
     }
 
     /**
