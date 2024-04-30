@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\ResetPasswordNotification;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-    use HasApiTokens;
+    use HasApiTokens, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -45,5 +47,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $url = config('app.client_url').'/reset-password?token='.$token.'&id='.base64_encode($this->email);
+        $this->notify(new ResetPasswordNotification($url));
     }
 }

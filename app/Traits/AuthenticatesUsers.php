@@ -18,6 +18,7 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
+            Auth::user()->tokens()->delete();
             Auth::logoutOtherDevices($request->get('password'));
             return $this->sendLoginResponse();
         }
@@ -39,7 +40,7 @@ trait AuthenticatesUsers
 
     protected function sendLoginResponse(): JsonResponse
     {
-        $token = auth()->user()?->createToken('authToken');
+        $token = auth()->user()?->createToken('authToken', ['*'], now()->addWeek());
 
         return response()->json(['status' => 'success', 'message' => 'Logged in successfully!', 'data' => ['token' => $token?->plainTextToken]]);
     }
