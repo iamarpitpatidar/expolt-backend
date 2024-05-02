@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Models\User;
+use League\Fractal\Resource\Primitive;
 use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
@@ -12,7 +13,7 @@ class UserTransformer extends TransformerAbstract
      *
      * @var array<string>
      */
-    protected array $availableIncludes = [];
+    protected array $availableIncludes = ['status'];
 
     /**
      * A Fractal transformer.
@@ -26,7 +27,18 @@ class UserTransformer extends TransformerAbstract
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
-            'role' => $user->roles()->first()->name,
+            'role' => $user->roles()->first()?->name,
         ];
+    }
+
+    /**
+     * Include Status
+     *
+     * @param User $user
+     * @return Primitive
+     */
+    public function includeStatus(User $user): Primitive
+    {
+        return $this->primitive($user->status);
     }
 }
