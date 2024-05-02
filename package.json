@@ -13,7 +13,7 @@
     "devDependencies": {
         "@commitlint/cli": "^19.2.1",
         "@commitlint/config-conventional": "^18.4.4",
-        "@commitlint/cz-commitlint": "^18.4.4",
+        "@commitlint/cz-commitlint": "^19.2.0",
         "@prettier/plugin-php": "^0.22.1",
         "commitizen": "^4.3.0",
         "enforce-branch-name": "^1.1.2",
