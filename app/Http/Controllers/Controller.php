@@ -9,9 +9,11 @@ abstract class Controller
     /**
      * send success response.
      *
-     * @param  array<string, mixed>|string  $result
+     * @param mixed $result
+     * @param int $code
+     * @return JsonResponse
      */
-    public function sendResponse(array|string $result, int $code = 200): JsonResponse
+    public function sendResponse(mixed $result, int $code = 200): JsonResponse
     {
         $response = ['status' => 'success'];
 
