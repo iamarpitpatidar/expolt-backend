@@ -8,12 +8,13 @@ use League\Fractal\TransformerAbstract;
 
 class AppTransformer extends TransformerAbstract
 {
+    protected array $defaultIncludes = ['status'];
     /**
      * List of resources possible to include
      *
      * @var array<string>
      */
-    protected array $availableIncludes = ['uuid', 'status'];
+    protected array $availableIncludes = ['status'];
 
     /**
      * A Fractal transformer.
@@ -29,13 +30,8 @@ class AppTransformer extends TransformerAbstract
             'description' => $app->description,
             'type' => $app->type,
             'uuid' => $app->uuid,
-            'meta' => $app->meta
+            'meta' => $app->meta,
         ];
-    }
-
-    public function includeUuid(App $app): Primitive
-    {
-        return $this->primitive($app->uuid);
     }
 
     public function includeStatus(App $app): Primitive

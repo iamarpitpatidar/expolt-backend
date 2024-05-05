@@ -22,7 +22,7 @@ class AppController extends Controller
 
     public function show(App $app): JsonResponse
     {
-        $app = fractal($app, new AppTransformer())->parseIncludes(['uuid', 'status']);
+        $app = fractal($app, new AppTransformer());
         return $this->sendResponse($app->toArray());
     }
 
@@ -67,7 +67,7 @@ class AppController extends Controller
     public function listApps(): JsonResponse
     {
         $apps = App::active()->get();
-        $apps = fractal($apps, new AppTransformer())->toArray();
+        $apps = fractal($apps, new AppTransformer())->parseExcludes('status')->toArray();
 
         return $this->sendResponse(['apps' => $apps]);
     }
