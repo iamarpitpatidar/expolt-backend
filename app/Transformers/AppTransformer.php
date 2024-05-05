@@ -28,6 +28,7 @@ class AppTransformer extends TransformerAbstract
             'name' => $app->name,
             'description' => $app->description,
             'type' => $app->type,
+            'uuid' => $app->uuid,
             'meta' => $app->meta
         ];
     }

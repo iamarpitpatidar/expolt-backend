@@ -17,7 +17,7 @@ class AppController extends Controller
         $apps = App::query()->get();
         $apps = fractal($apps, new AppTransformer())->toArray();
 
-        return $this->sendResponse($apps);
+        return $this->sendResponse(['apps' => $apps]);
     }
 
     public function show(App $app): JsonResponse
@@ -69,7 +69,7 @@ class AppController extends Controller
         $apps = App::active()->get();
         $apps = fractal($apps, new AppTransformer())->toArray();
 
-        return $this->sendResponse($apps);
+        return $this->sendResponse(['apps' => $apps]);
     }
 
     public function updateStatus(Request $request, App $app): JsonResponse
