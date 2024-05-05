@@ -39,6 +39,6 @@ class UserTransformer extends TransformerAbstract
      */
     public function includeStatus(User $user): Primitive
     {
-        return $this->primitive($user->status);
+        return $this->primitive((string) $user->status);
     }
 }

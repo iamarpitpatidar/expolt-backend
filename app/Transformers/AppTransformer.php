@@ -36,6 +36,6 @@ class AppTransformer extends TransformerAbstract
 
     public function includeStatus(App $app): Primitive
     {
-        return $this->primitive($app->status);
+        return $this->primitive((string) $app->status);
     }
 }
