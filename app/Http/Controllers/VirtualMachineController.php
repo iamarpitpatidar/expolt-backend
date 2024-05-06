@@ -7,13 +7,18 @@ use App\Models\App;
 use App\Models\VirtualMachine;
 use App\Transformers\VirtualMachineTransformer;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class VirtualMachineController extends Controller
 {
-    public function show( App $app): JsonResponse
+    public function show(Request $request): JsonResponse
     {
+        $app = App::query()->active()->findByUUID($request->get('uuid'))->first();
+        if (!$app) {
+            return $this->sendErrorResponse('App not found', 400);
+        }
+
         if (
             !VirtualMachine::query()
                 ->where('app_id', $app->id)

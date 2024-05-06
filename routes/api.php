@@ -24,11 +24,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('users/me', [UserController::class, 'showProfile']);
     Route::get('apps/list', [AppController::class, 'listApps']);
-
-    Route::group(['prefix' => 'apps/{app}'], function() {
-        Route::get('virtual-machine', [VirtualMachineController::class, 'show']);
-        Route::post('virtual-machine', [VirtualMachineController::class, 'store']);
-    });
+    Route::get('apps/{uuid}/virtual-machine', [VirtualMachineController::class, 'show']);
 
     Route::group(['middleware' => isAdmin::class], function () {
         Route::apiResource('apps', AppController::class);

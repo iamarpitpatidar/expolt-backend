@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string $meta
  * @property int $status
  * @method active()
+ * @method findByUUID(string $uuid)
  */
 class App extends Model
 {
@@ -30,5 +31,10 @@ class App extends Model
     public function scopeActive(Builder $query): void
     {
         $query->where('status', 1);
+    }
+
+    public function scopeFindByUUID(Builder $query, string $uuid): void
+    {
+        $query->where('uuid', $uuid);
     }
 }
