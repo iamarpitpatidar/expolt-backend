@@ -45,16 +45,15 @@ class AppController extends Controller
     public function update(UpdateAppRequest $request, App $app): JsonResponse
     {
         $data = $request->validated();
-        $input = [
-            'name' => $data['name'],
-            'description' => $data['description'],
-        ];
+        $data = array_filter($data, function ($value) {
+            return !is_null($value);
+        });
 
-        if ($app->type === 'web') {
-            $input['meta'] = array_merge($app['meta'], $data['meta']); //@phpstan-ignore-line
+        if ($app->type === 'web' && isset($data['meta'])) {
+            $data['meta'] = array_merge($app['meta'], $data['meta']); //@phpstan-ignore-line
         }
 
-        $app->update($input);
+        $app->update($data);
         return $this->sendResponse('App Updated Successfully.');
     }
 
@@ -70,17 +69,5 @@ class AppController extends Controller
         $apps = fractal($apps, new AppTransformer())->parseExcludes('status')->toArray();
 
         return $this->sendResponse(['apps' => $apps]);
-    }
-
-    public function updateStatus(Request $request, App $app): JsonResponse
-    {
-        $status = $request->get('status');
-        if (!is_int($status)) {
-            return $this->sendErrorResponse('Invalid status');
-        }
-
-        $app->status = $status;
-        $app->save();
-        return $this->sendResponse('Updated status');
     }
 }

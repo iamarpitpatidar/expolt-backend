@@ -18,6 +18,10 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
+            if (!Auth::user()->status) {
+                return $this->sendBlockedUserResponse();
+            }
+
             Auth::user()->tokens()->delete();
             Auth::logoutOtherDevices($request->get('password'));
             return $this->sendLoginResponse();
@@ -48,5 +52,10 @@ trait AuthenticatesUsers
     protected function sendFailedLoginResponse(): JsonResponse
     {
         return response()->json(['status' => 'error', 'message' => 'Username or Password incorrect!'], 401);
+    }
+
+    public function sendBlockedUserResponse(): JsonResponse
+    {
+        return response()->json(['status' => 'error', 'message' => 'User is deactivated!'], 401);
     }
 }

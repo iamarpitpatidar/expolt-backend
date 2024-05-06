@@ -22,10 +22,11 @@ class UpdateAppRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'meta' => ['required', 'array'],
-            'meta.redirectTo' => ['nullable', 'active_url']
+            'name' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'meta' => ['nullable', 'array'],
+            'meta.redirectTo' => ['nullable', 'active_url'],
+            'status' => ['nullable', 'in:0,1'],
         ];
     }
 }

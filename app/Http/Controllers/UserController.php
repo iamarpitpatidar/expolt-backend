@@ -23,7 +23,7 @@ class UserController extends Controller
         $data = $request->validated();
         /** @var User $user */
         $user = User::query()->create(array_merge($data, ['email_verified_at' => now()]));
-        $user->assignRole('user');
+        $user->assignRole($data['role']);
 
         return $this->sendResponse('User created successfully');
     }
@@ -37,6 +37,10 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
         $data = $request->validated();
+        $data = array_filter($data, function ($value) {
+            return !is_null($value);
+        });
+
         $user->update($data);
         return $this->sendResponse('User updated successfully');
     }
@@ -45,18 +49,6 @@ class UserController extends Controller
     {
         $user->delete();
         return $this->sendResponse('User deleted successfully');
-    }
-
-    public function updateStatus(Request $request, User $user): JsonResponse
-    {
-        $status = $request->get('status');
-        if (!is_int($status)) {
-            return $this->sendErrorResponse('Invalid status value');
-        }
-
-        $user->status = $status;
-        $user->save();
-        return $this->sendResponse('User status updated successfully');
     }
 
     public function showProfile(): JsonResponse

@@ -17,10 +17,10 @@ class SettingsController extends Controller
     public function update(Request $request): JsonResponse
     {
         $settings = $request->all();
-        $allowed = ['idle_timout'];
+        $allowed = ['idle_timeout'];
         foreach ($settings as $key => $value) {
             $setting = Settings::query()->where('key', $key)->first();
-            if (isset($allowed[$key]) && $setting) {
+            if (in_array($key, $allowed) && $setting) {
                 $setting->update(['value' => $value]);
             }
         }

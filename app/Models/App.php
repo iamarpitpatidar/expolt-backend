@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class App extends Model
 {
-    protected $fillable = ['name', 'description', 'type', 'uuid', 'meta'];
+    protected $fillable = ['name', 'description', 'type', 'uuid', 'meta', 'status'];
 
     protected $casts = [
         'meta' => 'json'
