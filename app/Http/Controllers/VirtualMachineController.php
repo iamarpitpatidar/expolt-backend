@@ -40,24 +40,4 @@ class VirtualMachineController extends Controller
 
         return $this->sendResponse(['machine' => $vm]);
     }
-
-    private function createInstance()
-    {
-        $response = Http::withHeader('Authorization', 'Bearer '.config('vm.api_key'))
-            ->post('https://api.vultr.com/v2/instances', [
-                'region' => config('vm.region'),
-//                'plan' => config('vm.plan'),
-                'os_id' => config('vm.os_id'),
-                'label' => config('vm.label'),
-                'tag' => config('vm.tag'),
-            ])->json();
-
-        if (isset($response['error'])) {
-            // update machine failed
-        } else {
-            // update machine success
-        }
-
-        return $this->sendResponse(['machine' => $response]);
-    }
 }

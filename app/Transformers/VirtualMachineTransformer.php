@@ -30,6 +30,7 @@ class VirtualMachineTransformer extends TransformerAbstract
         $ip = $meta['ip'] ?? '';
         $port = $meta['port'] ?? '';
 
+        return $this->primitive($meta);
         return $this->primitive([
             'redirectURL' => $ip && $port ? "http://$ip:$port" : '',
         ]);
