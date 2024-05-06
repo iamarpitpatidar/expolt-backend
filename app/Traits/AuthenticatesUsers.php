@@ -51,11 +51,15 @@ trait AuthenticatesUsers
 
     protected function sendFailedLoginResponse(): JsonResponse
     {
-        return response()->json(['status' => 'error', 'message' => 'Username or Password incorrect!'], 401);
+        return response()->json(['status' => 'error', 'status_code' => 'INVALID_CREDENTIALS', 'message' => 'Username or Password incorrect!'], 401);
     }
 
     public function sendBlockedUserResponse(): JsonResponse
     {
-        return response()->json(['status' => 'error', 'message' => 'User is deactivated!'], 401);
+        return response()->json([
+            'status' => 'error',
+            'status_code' => 'USER_BLOCKED',
+            'message' => 'User is deactivated!'
+        ], 401);
     }
 }
