@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\VirtualMachine;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -39,7 +40,10 @@ class DestroyVirtualMachinesJob implements ShouldQueue
         $response = Http::withHeader('Authorization', 'Bearer '.config('vm.api_key'))
             ->delete('https://api.digitalocean.com/v2/droplets?tag_name=expolt_user_'.$this->userId);
 
-        if ($response->status() !== 204) {
+        if ($response->status() === 204) {
+            // success
+            VirtualMachine::query()->where('user_id', $this->userId)->delete();
+        } else {
             // failed
             /** @var array{message:string} $json */
             $json = $response->json();
