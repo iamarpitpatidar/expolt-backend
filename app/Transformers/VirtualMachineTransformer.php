@@ -3,13 +3,10 @@
 namespace App\Transformers;
 
 use App\Models\VirtualMachine;
-use League\Fractal\Resource\Primitive;
 use League\Fractal\TransformerAbstract;
 
 class VirtualMachineTransformer extends TransformerAbstract
 {
-    protected array $defaultIncludes = ['meta'];
-
     /**
      * A Fractal transformer.
      *
@@ -18,21 +15,24 @@ class VirtualMachineTransformer extends TransformerAbstract
      */
     public function transform(VirtualMachine $machine): array
     {
+        $meta = $machine->meta;
+        $networks = $meta['networks'] ?? [];
         return [
             'id' => $machine->uuid,
             'state' => $machine->current_state,
+            'redirectTo' => $this->getRedirectURL($networks),
         ];
     }
 
-    public function includeMeta(VirtualMachine $machine): Primitive
+    private function getRedirectURL(array $networks): string
     {
-        $meta = $machine->meta;
-        $ip = $meta['ip'] ?? '';
-        $port = $meta['port'] ?? '';
+        $port = 8006;
+        foreach ($networks as $network) {
+            if ($network['type'] === 'public') {
+                return 'http://'.$network['ip_address'].':'.$port;
+            }
+        }
 
-        return $this->primitive($meta);
-        return $this->primitive([
-            'redirectURL' => $ip && $port ? "http://$ip:$port" : '',
-        ]);
+        return '';
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property string $uuid
  * @property string $current_state
+ * @property int $user_id
  */
 class VirtualMachine extends Model
 {

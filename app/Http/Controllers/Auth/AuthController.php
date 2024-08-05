@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\DestroyVirtualMachinesJob;
 use App\Traits\AuthenticatesUsers;
 use App\Traits\ThrottlesLogins;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ final class AuthController extends Controller
     public function logout(): JsonResponse
     {
         Auth::user()?->tokens()->delete();
+        dispatch(new DestroyVirtualMachinesJob(Auth::id()));
         return $this->sendResponse('User logged out successfully');
     }
 }
