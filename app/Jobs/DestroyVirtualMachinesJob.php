@@ -37,14 +37,15 @@ class DestroyVirtualMachinesJob implements ShouldQueue
 
         // Destroy virtual machines
         $response = Http::withHeader('Authorization', 'Bearer '.config('vm.api_key'))
-            ->delete('https://api.digitalocean.com/v2/droplets?tag_name=expolt_user:'.$this->userId);
+            ->delete('https://api.digitalocean.com/v2/droplets?tag_name=expolt_user_'.$this->userId);
 
         if ($response->status() !== 204) {
             // failed
-            $response = $response->json();
-            Log::error($response['message']);
+            /** @var array{message:string} $json */
+            $json = $response->json();
+            Log::error($json['message']);
 
-            $this->fail($response['message']);
+            $this->fail($json['message']);
         }
     }
 }

@@ -61,7 +61,7 @@ class CreateVMJob implements ShouldQueue
                 'image' => config('vm.snapshot'),
                 'ssh_keys' => config('vm.ssh_keys'),
                 'monitoring' => true,
-                'tags' => array_merge(config('vm.tags'), ['expolt_user:'.$machine->user_id]), // @phpstan-ignore-line
+                'tags' => array_merge(config('vm.tags'), ['expolt_user_'.$machine->user_id]), // @phpstan-ignore-line
                 'with_droplet_agent' => false
             ]);
 
