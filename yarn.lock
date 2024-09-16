@@ -54,29 +54,17 @@
     "@commitlint/types" "^19.5.0"
     ajv "^8.11.0"
 
-"@commitlint/cz-commitlint@^19.2.0":
-  version "19.2.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/cz-commitlint/-/cz-commitlint-19.2.0.tgz#1977918a8adff5f8247bf02f4a6f603fd9a0b664"
-  integrity sha512-kudzHMY9/GxflGyAWMiisiBq2UkyQL1D1eWjGKoC66qQ+5jxRYeDaiVwTdPxYMnmehftNcpksZATDYKqdPP0Wg==
+"@commitlint/cz-commitlint@^19.5.0":
+  version "19.5.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/cz-commitlint/-/cz-commitlint-19.5.0.tgz#3ebf0aca0727d49581c378076606663603e74ce9"
+  integrity sha512-PNfIC54J3lDVIBJTo7A1RMp1kdOYkGcUz27VG0NP/DzFKLspXcQm13RnKc16BjFNCJGLC7iaXjucrfrKHOqorQ==
   dependencies:
-    "@commitlint/ensure" "^19.0.3"
-    "@commitlint/load" "^19.2.0"
-    "@commitlint/types" "^19.0.3"
+    "@commitlint/ensure" "^19.5.0"
+    "@commitlint/load" "^19.5.0"
+    "@commitlint/types" "^19.5.0"
     chalk "^5.3.0"
     lodash.isplainobject "^4.0.6"
     word-wrap "^1.2.5"
-
-"@commitlint/ensure@^19.0.3":
-  version "19.0.3"
-  resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-19.0.3.tgz#d172b1b72ca88cbd317ea1ee79f3a03dbaccc76e"
-  integrity sha512-SZEpa/VvBLoT+EFZVb91YWbmaZ/9rPH3ESrINOl0HD2kMYsjvl0tF7nMHh0EpTcv4+gTtZBAe1y/SS6/OhfZzQ==
-  dependencies:
-    "@commitlint/types" "^19.0.3"
-    lodash.camelcase "^4.3.0"
-    lodash.kebabcase "^4.1.1"
-    lodash.snakecase "^4.1.1"
-    lodash.startcase "^4.4.0"
-    lodash.upperfirst "^4.3.1"
 
 "@commitlint/ensure@^19.5.0":
   version "19.5.0"
@@ -121,7 +109,7 @@
     "@commitlint/rules" "^19.5.0"
     "@commitlint/types" "^19.5.0"
 
-"@commitlint/load@>6.1.1", "@commitlint/load@^19.2.0", "@commitlint/load@^19.5.0":
+"@commitlint/load@>6.1.1", "@commitlint/load@^19.5.0":
   version "19.5.0"
   resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-19.5.0.tgz#67f90a294894d1f99b930b6152bed2df44a81794"
   integrity sha512-INOUhkL/qaKqwcTUvCE8iIUf5XHsEPCLY9looJ/ipzi7jtGhgmtH7OOFiNvwYgH7mA8osUWOUDV8t4E2HAi4xA==
@@ -196,7 +184,7 @@
   dependencies:
     find-up "^7.0.0"
 
-"@commitlint/types@^19.0.3", "@commitlint/types@^19.5.0":
+"@commitlint/types@^19.5.0":
   version "19.5.0"
   resolved "https://registry.yarnpkg.com/@commitlint/types/-/types-19.5.0.tgz#c5084d1231d4dd50e40bdb656ee7601f691400b3"
   integrity sha512-DSHae2obMSMkAtTBSOulg5X7/z+rGLxcXQIkg3OmWvY6wifojge5uVMydfhUvs7yQj+V7jNmRZ2Xzl8GJyqRgg==
