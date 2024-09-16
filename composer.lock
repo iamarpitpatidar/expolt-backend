@@ -3305,16 +3305,16 @@
         },
         {
             "name": "spatie/laravel-fractal",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-fractal.git",
-                "reference": "5b6a17720fc77891e79f505dde8368ea8e71fb13"
+                "reference": "0a30630d2ab49590af118172c03c99c0d838dab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-fractal/zipball/5b6a17720fc77891e79f505dde8368ea8e71fb13",
-                "reference": "5b6a17720fc77891e79f505dde8368ea8e71fb13",
+                "url": "https://api.github.com/repos/spatie/laravel-fractal/zipball/0a30630d2ab49590af118172c03c99c0d838dab1",
+                "reference": "0a30630d2ab49590af118172c03c99c0d838dab1",
                 "shasum": ""
             },
             "require": {
@@ -3374,7 +3374,7 @@
                 "transform"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-fractal/tree/6.2.0"
+                "source": "https://github.com/spatie/laravel-fractal/tree/6.2.1"
             },
             "funding": [
                 {
@@ -3382,7 +3382,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-03-18T12:38:19+00:00"
+            "time": "2024-06-04T09:33:08+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
