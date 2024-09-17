@@ -20,6 +20,6 @@ class VirtualMachine extends Model
     ];
 
     protected $casts = [
-        'meta' => 'encrypted:json'
+        'meta' => 'json'
     ];
 }
