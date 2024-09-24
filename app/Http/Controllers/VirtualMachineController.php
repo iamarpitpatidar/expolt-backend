@@ -20,7 +20,6 @@ class VirtualMachineController extends Controller
 
         if (
             !VirtualMachine::query()
-                ->where('app_id', $app->id)
                 ->where('user_id', auth()->user()?->id)
                 ->exists()
         ) {
@@ -28,7 +27,6 @@ class VirtualMachineController extends Controller
 
             $machine = VirtualMachine::query()->create([
                 'uuid' => $uuid,
-                'app_id' => $app->id,
                 'user_id' => auth()->user()?->id,
                 'current_state' => 'pending',
                 'meta' => []
@@ -37,7 +35,7 @@ class VirtualMachineController extends Controller
         } else {
             $machine = VirtualMachine::query()
                 ->where('user_id', auth()->user()?->id)
-                ->where('app_id', $app->id)->first();
+                ->first();
         }
 
         $vm = fractal($machine, new VirtualMachineTransformer())->toArray();
