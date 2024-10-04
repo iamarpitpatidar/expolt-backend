@@ -21,6 +21,7 @@ class VirtualMachineController extends Controller
         if (
             !VirtualMachine::query()
                 ->where('user_id', auth()->user()?->id)
+                ->whereIn('current_state', ['running', 'provisioning'])
                 ->exists()
         ) {
             $uuid = Str::uuid();
