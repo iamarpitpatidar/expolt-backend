@@ -66,4 +66,17 @@ class VirtualMachineController extends Controller
 
         return $this->sendResponse(['machine' => $virtualMachine->uuid]);
     }
+
+    public function ping(Request $request): JsonResponse
+    {
+        $machine = VirtualMachine::query()->where('uuid', $request->uuid)->first();
+        if (!$machine) {
+            return $this->forbiddenError();
+        }
+
+        $machine->last_active = now();
+        $machine->save();
+
+        return $this->sendResponse('success');
+    }
 }

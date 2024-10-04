@@ -36,3 +36,4 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 });
 
 Route::get('whoami', [VirtualMachineController::class, 'whoAmI']);
+Route::get('vm/{uuid}/ping', [VirtualMachineController::class, 'ping']);
