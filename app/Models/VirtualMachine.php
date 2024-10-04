@@ -16,7 +16,8 @@ class VirtualMachine extends Model
         'app_id',
         'user_id',
         'current_state',
-        'meta'
+        'meta',
+        'last_active'
     ];
 
     protected $casts = [
