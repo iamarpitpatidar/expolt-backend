@@ -77,6 +77,6 @@ class VirtualMachineController extends Controller
         $machine->last_active = now();
         $machine->save();
 
-        return $this->sendResponse('success');
+        return $this->sendResponse('ping updated');
     }
 }
