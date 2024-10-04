@@ -49,7 +49,7 @@ class VirtualMachineController extends Controller
     {
         $client_ip = $request->ip();
         $virtualMachines = VirtualMachine::query()
-            ->where('meta', 'like', '' . $client_ip . '%')
+            ->where('meta', 'like', '%' . $client_ip . '%')
             ->get();
 
         $virtualMachine = $virtualMachines->first(function ($vm) use ($client_ip) {
