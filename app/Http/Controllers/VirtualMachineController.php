@@ -7,6 +7,7 @@ use App\Models\App;
 use App\Models\VirtualMachine;
 use App\Transformers\VirtualMachineTransformer;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class VirtualMachineController extends Controller
@@ -42,5 +43,27 @@ class VirtualMachineController extends Controller
         $vm = fractal($machine, new VirtualMachineTransformer())->toArray();
 
         return $this->sendResponse(['machine' => $vm]);
+    }
+
+    public function whoAmI(Request $request): JsonResponse
+    {
+        $client_ip = $request->ip();
+        $virtualMachines = VirtualMachine::query()
+            ->where('meta', 'like', '%"ip_address":"' . $client_ip . '"%')
+            ->get();
+
+        $virtualMachine = $virtualMachines->first(function ($vm) use ($client_ip) {
+            foreach ($vm->meta['networks'] as $network) {
+                if ($network['ip_address'] === $client_ip) {
+                    return true;
+                }
+            }
+            return false;
+        });
+        if (!$virtualMachine) {
+            return $this->forbiddenError();
+        }
+
+        return $this->sendResponse(['machine' => $virtualMachine->uuid]);
     }
 }

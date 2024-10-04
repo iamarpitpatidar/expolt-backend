@@ -34,3 +34,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::patch('settings', [SettingsController::class, 'update']);
     });
 });
+
+Route::get('whoami', [VirtualMachineController::class, 'whoAmI']);
