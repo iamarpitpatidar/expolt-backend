@@ -31,7 +31,8 @@ class VirtualMachineController extends Controller
                 'uuid' => $uuid,
                 'user_id' => auth()->user()?->id,
                 'current_state' => 'pending',
-                'meta' => []
+                'meta' => [],
+                'last_active' => now()
             ]);
             dispatch(new CreateVMJob($uuid));
         } else {
