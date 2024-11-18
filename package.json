@@ -17,7 +17,7 @@
         "@prettier/plugin-php": "^0.22.1",
         "commitizen": "^4.3.1",
         "enforce-branch-name": "^1.1.2",
-        "husky": "^9.1.6",
+        "husky": "^9.1.7",
         "lint-staged": "^15.2.10",
         "prettier": "^3.3.3"
     },
